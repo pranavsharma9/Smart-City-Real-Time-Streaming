@@ -5,18 +5,18 @@ from datetime import datetime, timedelta
 import random
 import uuid
 import time 
-LONDON_COORDINATES={
+CHAMPAIGN_COORDINATES={
     "latitude":51.5074,
     "longitude":-0.1278
 }
 
-BIRMINGHAM_COORDINATES={
+CHICAGO_COORDINATES={
     "latitude":52.4862,
     "longitude":-1.8904
 }
 
-LATITUDE_INCREMENT=(BIRMINGHAM_COORDINATES["latitude"]-LONDON_COORDINATES["latitude"])/100
-LONGITUDE_INCREMENT=(BIRMINGHAM_COORDINATES["longitude"]-LONDON_COORDINATES["longitude"])/100
+LATITUDE_INCREMENT=(CHICAGO_COORDINATES["latitude"]-CHAMPAIGN_COORDINATES["latitude"])/100
+LONGITUDE_INCREMENT=(CHICAGO_COORDINATES["longitude"]-CHAMPAIGN_COORDINATES["longitude"])/100
 
 KAFKA_BOOSTRAP_SERVERS = os.environ.get('KAFKA_BOOSTRAP_SERVERS', 'localhost:9092')
 VEHICLE_TOPIC=os.environ.get('VEHICLE_TOPIC', 'vehicle_data')
@@ -26,7 +26,7 @@ WEATHER_TOPIC=os.environ.get('WEATHER_TOPIC', 'weather_data')
 EMERGENCY_TOPIC=os.environ.get('EMERGENCY_TOPIC', 'emergency_data')
 
 start_time=datetime.now()
-start_location=LONDON_COORDINATES.copy()
+start_location=CHAMPAIGN_COORDINATES.copy()
 
 def get_next_time():
     global start_time
@@ -141,7 +141,7 @@ def simulate_journey(producer,device_id):
         # print(weather_data)
         # print(emergency_data)
 
-        if (vehicle_data['location'][0]>=BIRMINGHAM_COORDINATES['latitude'] and vehicle_data['location'][1]<=BIRMINGHAM_COORDINATES['longitude']):
+        if (vehicle_data['location'][0]>=CHICAGO_COORDINATES['latitude'] and vehicle_data['location'][1]<=CHICAGO_COORDINATES['longitude']):
             print('Journey Ended')
             break
 
